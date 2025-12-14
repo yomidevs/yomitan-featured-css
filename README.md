@@ -23,4 +23,4 @@ Beautiful custom CSS for Japanese kindly shared by Bint (`caoimhe.00` on Discord
 
 #### [Nelan's Yomitan CSS](./yomitan-featured-css/nelan's%20yomitan%20css/)
 
-Beautiful custom CSS for Japanese kindly shared by Nelan (`nelan.hyu` on Discord). 
+A glassy look for Yomitan (Japanese) kindly shared by Nelan (`nelan.hyu` on Discord). 
