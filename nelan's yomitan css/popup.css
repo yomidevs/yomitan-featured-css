@@ -1,0 +1,772 @@
+/* popup.css */
+
+/* << Base Settings >> */
+* {
+   margin: 0;
+   padding: 0;
+}
+
+/* ===== DARK MODE ===== */
+:root[data-theme="dark"] {
+   color-scheme: dark !important;
+   --font-sans: noto sans jp;
+   --font-serif: klee one;
+
+   --text-color: #ffffff;
+   --subtext-color: #e4ecdb;
+
+   --headword-term-font-size: 2.3rem;
+   --example-sentence-opacity: 0.6;
+
+   --highlight-text-color: #baadfb;
+   --example-sentence-color: var(--text-color);
+
+   --devoiced-color: cornflowerBlue;
+   --nasal-color: #ff4936;
+
+   --atamadaka: #f5436d;
+   --heiban: #39c1ff;
+   --nakadaka: #fca311;
+   --odaka: #40d4a6;
+   --kifuku: #afa2ff;
+
+   --popup-bg-color: rgba(0, 0, 0, 0.6);
+
+   --dict-tag-bg-color: black;
+   --frequency-tag-bg-color: black;
+   --pitch-tag-bg-color: black;
+
+   --frequency-tag-color: none;
+   --frequency-tag-color1: #daffef;
+   --frequency-tag-color2: #a6f6f3;
+   --frequency-tag-color3: #6ed2c6;
+   --frequency-tag-color4: #929af0;
+   --frequency-tag-color5: #a492f4;
+
+   --dict-tag-color: none;
+   --dict-tag-color1: #d7e3fc;
+   --dict-tag-color2: #ccdbfd;
+   --dict-tag-color3: #abc4ff;
+   --dict-tag-color4: #93b5ff;
+   --dict-tag-color5: #6d95eb;
+
+   --pitch-tag-color: #eff7f6;
+
+   --inflection-hover-symbol: "︾";
+   --inflection-text-color: #ffe29f;
+}
+
+/* ===== LIGHT MODE ===== */
+:root[data-theme="light"] {
+   color-scheme: light !important;
+   --font-sans: noto sans jp;
+   --font-serif: klee one;
+
+   --text-color: #1a1a1a;
+   --subtext-color: #4a4a4a;
+
+   --headword-term-font-size: 2.3rem;
+   --example-sentence-opacity: 0.7;
+
+   --highlight-text-color: #6b4bcc;
+   --example-sentence-color: var(--text-color);
+
+   --devoiced-color: #2563eb;
+   --nasal-color: #dc2626;
+
+   --atamadaka: #dc2626;
+   --heiban: #0284c7;
+   --nakadaka: #ea580c;
+   --odaka: #059669;
+   --kifuku: #7c3aed;
+
+   --popup-bg-color: rgba(255, 255, 255, 0.5);
+
+   --dict-tag-bg-color: #f5f5f5;
+   --frequency-tag-bg-color: #f5f5f5;
+   --pitch-tag-bg-color: #f5f5f5;
+
+   --frequency-tag-color: none;
+   --frequency-tag-color1: #065f46;
+   --frequency-tag-color2: #0e7490;
+   --frequency-tag-color3: #0369a1;
+   --frequency-tag-color4: #4338ca;
+   --frequency-tag-color5: #6d28d9;
+
+   --dict-tag-color: none;
+   --dict-tag-color1: #1e40af;
+   --dict-tag-color2: #1d4ed8;
+   --dict-tag-color3: #2563eb;
+   --dict-tag-color4: #3b82f6;
+   --dict-tag-color5: #60a5fa;
+
+   --pitch-tag-color: #334155;
+
+   --inflection-hover-symbol: "︾";
+   --inflection-text-color: #b45309;
+}
+
+body {
+   font-family: var(--font-sans);
+   position: sticky;
+   background-color: var(--popup-bg-color);
+   color: var(--text-color);
+}
+
+.gloss-content {
+   font-size: 1.15em;
+}
+
+button.action-button[title="Add duplicate expression (Alt + E)"],
+button.action-button[title="Add reading (Alt + R)"] {
+   display: none;
+}
+
+.scrollbar,
+.content-scroll,
+.contain-overscroll,
+.scrollbar::-webkit-scrollbar {
+   overflow-x: scroll;
+   overflow-y: scroll;
+
+   scrollbar-color: transparent transparent !important;
+   scrollbar-width: none !important;
+}
+
+/* << Headword >> */
+.headword-term {
+   font-family: serif;
+   font-size: var(--headword-term-font-size);
+}
+
+.headword-term rt {
+   margin-top: 0.1em;
+   margin-bottom: 0.1em;
+   font-size: 0.45em !important;
+}
+
+/* << Inflection (Grammar)>> */
+.inflection-source-icon,
+.inflection-rule-chains:not(:empty) li {
+   display: none;
+}
+
+.inflection-rule-chain:hover,
+.inflection-rule-chains:not(:empty):active li {
+   display: block;
+}
+
+.inflection {
+   color: var(--inflection-text-color);
+   font-weight: bold;
+}
+
+/* Icon */
+.inflection-rule-chains:not(:empty)::before {
+   content: var(--inflection-hover-symbol);
+   cursor: help;
+   color: var(--inflection-text-color);
+}
+
+.inflection-rule-chain:nth-last-of-type(1) {
+   margin-bottom: 0.2em;
+}
+
+/* << Frequency >> */
+.frequency-group-list {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 0 1em;
+}
+
+.frequency-group-item {
+   list-style: none;
+}
+
+.frequency-group-item .tag-label {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 0.8em !important;
+   text-wrap-mode: nowrap;
+}
+
+.frequency-value {
+   color: color-mix(in srgb, var(--frequency-tag-color) 50%, var(--text-color) 50%);
+}
+
+[data-average-frequency="true"] [data-section-type="frequencies"]:active .frequency-group-item:not([data-details="Average"]) {
+   display: block;
+}
+
+[data-average-frequency="true"] [data-section-type="frequencies"]:active .frequency-group-item[data-details="Average"] {
+   display: none;
+}
+
+/* << Styling & Coloring >> */
+.frequency-group-item[data-details="Average"] {
+   --frequency-tag-color: var(--frequency-tag-color1);
+}
+
+.frequency-group-item:nth-child(1):not([data-details="Average"]) {
+   --frequency-tag-color: var(--frequency-tag-color1);
+}
+
+.frequency-group-item:nth-child(2):not([data-details="Average"]) {
+   --frequency-tag-color: var(--frequency-tag-color2);
+}
+
+.frequency-group-item:nth-child(3):not([data-details="Average"]) {
+   --frequency-tag-color: var(--frequency-tag-color3);
+}
+
+.frequency-group-item:nth-child(4):not([data-details="Average"]) {
+   --frequency-tag-color: var(--frequency-tag-color4);
+}
+
+.frequency-group-item:nth-child(n + 5):not([data-details="Average"]) {
+   --frequency-tag-color: var(--frequency-tag-color5);
+}
+
+.frequency-group-tag {
+   display: inline-flex;
+   flex-direction: column;
+   min-width: 62px;
+}
+
+.frequency-group-tag .tag-label {
+   background-color: transparent;
+   justify-content: left;
+   padding-left: 0;
+}
+
+.frequency-group-tag .tag-label .tag-label-content {
+   font-size: 0.8em;
+   color: var(--frequency-tag-color);
+}
+
+.frequency-group-tag .tag-body {
+   background-color: var(--frequency-tag-bg-color);
+   justify-content: center;
+   margin: 0;
+   text-wrap-mode: nowrap;
+}
+
+.frequency-group-tag .tag-body::after,
+.frequency-group-tag .tag-body::before {
+   border: none;
+   content: "";
+   padding: 1.2px;
+   border-radius: inherit;
+   background-image: conic-gradient(from 90deg,
+         var(--frequency-tag-color) 0% 45%,
+         var(--frequency-tag-bg-color) 45% 50%,
+         var(--frequency-tag-color) 50% 90%,
+         var(--frequency-tag-bg-color) 90% 100%);
+   z-index: -1;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 100%;
+}
+
+.frequency-group-tag .tag-body::before {
+   padding: 2px;
+   filter: blur(4px);
+   z-index: -2;
+   opacity: 0.6;
+}
+
+/* << Pitch Accents >> */
+.pronunciation-downstep-notation-prefix,
+.pronunciation-downstep-notation-suffix {
+   display: none;
+}
+
+.pronunciation-downstep-notation-number {
+   font-weight: bold;
+   padding-left: 0.1em !important;
+   padding-right: 0.1em !important;
+}
+
+.pronunciation-group-list {
+   list-style: none;
+   padding-left: 0;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.pronunciation-group-tag-list,
+.pronunciation-list {
+   padding: 0;
+   margin: 0;
+   list-style: none;
+   width: 100%;
+}
+
+.pronunciation {
+   display: block;
+}
+
+.pronunciation-group-tag-list {
+   margin: 0;
+   margin-bottom: 3px;
+}
+
+.pronunciation-group {
+   display: inline-flex;
+   flex-direction: column;
+   margin-top: 2.5px;
+   margin-bottom: 2.5px;
+}
+
+.pronunciation-group-list {
+   display: flex;
+   flex-direction: column;
+}
+
+.pronunciation-group-tag-list .tag-label {
+   background-color: var(--pitch-tag-bg-color);
+   position: relative;
+   padding: 0;
+   min-height: 20px;
+   min-width: 60px;
+}
+
+.pronunciation-group-tag-list .tag-label-content,
+.pronunciation-group-tag-list .tag-label {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: var(--pitch-tag-color);
+}
+
+.pronunciation-group-tag-list .tag-label::before,
+.pronunciation-group-tag-list .tag-label::after {
+   content: "";
+   padding: 1.2px;
+   border-radius: inherit;
+   background-image: conic-gradient(from 205deg,
+         var(--pitch-tag-color) 5% 20%,
+         var(--pitch-tag-bg-color) 20% 50%,
+         var(--pitch-tag-color) 55% 70%,
+         var(--pitch-tag-bg-color) 70% 100%);
+   z-index: -1;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 100%;
+}
+
+.pronunciation-group-tag-list .tag-label::before {
+   padding: 2px;
+   filter: blur(4px);
+   z-index: -2;
+   opacity: 0.6;
+}
+
+/* Dictionary Tags */
+.definition-item:nth-child(1) {
+   --dict-tag-color: var(--dict-tag-color1);
+}
+
+.definition-item:nth-child(2) {
+   --dict-tag-color: var(--dict-tag-color2);
+}
+
+.definition-item:nth-child(3) {
+   --dict-tag-color: var(--dict-tag-color3);
+}
+
+.definition-item:nth-child(4) {
+   --dict-tag-color: var(--dict-tag-color4);
+}
+
+.definition-item:nth-child(n + 5) {
+   --dict-tag-color: var(--dict-tag-color5);
+}
+
+.definition-item {
+   margin-top: 5px;
+   font-family: var(--font-sans);
+}
+
+.definition-item .tag-label {
+   background-color: var(--dict-tag-bg-color);
+   position: relative;
+   color: color-mix(in srgb, var(--dict-tag-color) 70%, white 30%);
+   min-width: 60px;
+   padding: 5px;
+}
+
+.definition-item .tag-label::before,
+.definition-item .tag-label::after {
+   content: "";
+   padding: 1.5px;
+   border-radius: inherit;
+   background-image: conic-gradient(from 90deg,
+         var(--popup-bg-color) 13%,
+         var(--dict-tag-color));
+   z-index: -1;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 100%;
+}
+
+.definition-item .tag-label::before {
+   padding: 3px;
+   filter: blur(4px);
+   z-index: -2;
+   opacity: 0.6;
+}
+
+/* << Pitch Type Colors >> */
+/* Heiban */
+html:has(.entry-current .headword[data-is-primary="true"][data-pronunciation-categories^="heiban"]) {
+   --accent-color: var(--heiban);
+   --pitch-tag-color: var(--heiban);
+}
+
+.headword[data-pronunciation-categories^="heiban"] {
+   color: var(--heiban);
+   --headword-text-color: var(--heiban);
+   --headword-current-kanji-border-color: var(--heiban);
+   --headword-current-kanji-text-color: var(--heiban);
+}
+
+.pronunciation:has(.pronunciation-downstep-notation[data-downstep-position="0"]) {
+   --pronunciation-annotation-color: var(--heiban);
+}
+
+.pronunciation:has(.pronunciation-downstep-notation[data-downstep-position="0"]) .pronunciation-downstep-notation-number {
+   color: var(--heiban);
+}
+
+/* Atamadaka */
+html:has(.entry-current .headword[data-is-primary="true"][data-pronunciation-categories^="atamadaka"]) {
+   --accent-color: var(--atamadaka);
+   --pitch-tag-color: var(--atamadaka);
+}
+
+.headword[data-pronunciation-categories^="atamadaka"] {
+   color: var(--atamadaka);
+   --headword-text-color: var(--atamadaka);
+   --headword-current-kanji-border-color: var(--atamadaka);
+   --headword-current-kanji-text-color: var(--atamadaka);
+}
+
+.pronunciation:has(.pronunciation-downstep-notation[data-downstep-position="1"]) {
+   --pronunciation-annotation-color: var(--atamadaka);
+}
+
+.pronunciation:has(.pronunciation-downstep-notation[data-downstep-position="1"]) .pronunciation-downstep-notation-number {
+   color: var(--atamadaka);
+}
+
+/* Nakadaka */
+html:has(.entry-current .headword[data-is-primary="true"][data-pronunciation-categories^="nakadaka"]) {
+   --accent-color: var(--nakadaka);
+   --pitch-tag-color: var(--nakadaka);
+}
+
+.headword[data-pronunciation-categories^="nakadaka"] {
+   color: var(--nakadaka);
+   --headword-text-color: var(--nakadaka);
+   --headword-current-kanji-border-color: var(--nakadaka);
+   --headword-current-kanji-text-color: var(--nakadaka);
+}
+
+.pronunciation:has(.pronunciation-mora:not(:last-child)[data-pitch-next="low"]):has(.pronunciation-downstep-notation:not([data-downstep-position="1"])) {
+   --pronunciation-annotation-color: var(--nakadaka) !important;
+}
+
+.pronunciation:has(.pronunciation-mora:not(:last-child)[data-pitch-next="low"]):has(.pronunciation-downstep-notation:not([data-downstep-position="1"])) .pronunciation-downstep-notation-number {
+   color: var(--nakadaka) !important;
+}
+
+/* Odaka */
+html:has(.entry-current .headword[data-is-primary="true"][data-pronunciation-categories^="odaka"]) {
+   --accent-color: var(--odaka);
+   --pitch-tag-color: var(--odaka);
+}
+
+.headword[data-pronunciation-categories^="odaka"] {
+   color: var(--odaka);
+   --headword-text-color: var(--odaka);
+   --headword-current-kanji-border-color: var(--odaka);
+   --headword-current-kanji-text-color: var(--odaka);
+}
+
+.pronunciation:has(.pronunciation-mora:last-child[data-pitch-next="low"]):not(:has(.pronunciation-downstep-notation[data-downstep-position="1"])) {
+   --pronunciation-annotation-color: var(--odaka);
+}
+
+.pronunciation:has(.pronunciation-mora:last-child[data-pitch-next="low"]):not(:has(.pronunciation-downstep-notation[data-downstep-position="1"])) .pronunciation-downstep-notation-number {
+   color: var(--odaka);
+}
+
+/* Kifuku */
+html:has(.entry-current .headword[data-is-primary="true"][data-pronunciation-categories^="kifuku"]) {
+   --accent-color: var(--kifuku);
+   --pitch-tag-color: var(--kifuku);
+}
+
+.headword[data-pronunciation-categories^="kifuku"] {
+   color: var(--kifuku);
+   --headword-text-color: var(--kifuku);
+   --headword-current-kanji-border-color: var(--kifuku);
+   --headword-current-kanji-text-color: var(--kifuku);
+}
+
+/* Nasal Mora */
+.pronunciation-nasal-indicator {
+   border: 0.1em solid var(--nasal-color);
+   width: 0.35em;
+   height: 0.35em;
+   right: -0.1em;
+   top: 0.225em;
+}
+
+/* Devoiced Mora */
+.pronunciation-devoice-indicator {
+   display: none;
+}
+
+.pronunciation-mora[data-devoice="true"] {
+   color: var(--devoiced-color);
+}
+
+/* << Dictionary Entries >> */
+.gloss-list,
+.gloss-list ul,
+.gloss-list ol,
+.gloss-list li {
+   list-style: none !important;
+   padding: 0;
+   margin: 0;
+}
+
+.gloss-sc-ol>li:nth-child(n + 6) {
+   display: none;
+}
+
+.definition,
+.definition-list {
+   list-style: none;
+   list-style-type: none;
+   padding: 0;
+}
+
+.definition-item .tag-label {
+   min-width: fit-content;
+}
+
+[data-sc-content="glossary"] {
+   display: flex;
+   flex-wrap: wrap;
+   padding: 0;
+   margin: 0;
+}
+
+[data-sc-content="glossary"] li:not(:last-child)::after {
+   content: "|";
+   color: var(--subtext-color);
+   margin: 0 8px;
+}
+
+/* << Jitendex >> */
+[data-dictionary*="Jitendex"] {
+   [data-details*="high priority"],
+   [data-category="popular"],
+   [data-category="frequent"] {
+      display: none;
+   }
+
+   [data-sc-class="form-special"] {
+      display: none;
+   }
+
+   [title="valid only for these forms and/or readings"] {
+      color: var(--highlight-text-color);
+   }
+
+   li[data-sc-content="sense-group"],
+   li[data-sc-content="forms"],
+   li[data-sc-content="sense"],
+   ul[data-sc-content="glossary"] {
+      padding-left: 0 !important;
+   }
+
+   *[data-sc-content="example-sentence-a"] {
+      font-size: 1em !important;
+   }
+
+   [data-sc-content="example-keyword"] {
+      color: var(--dict-tag-color) !important;
+      text-decoration: none !important;
+   }
+
+   [data-sc-content="example-sentence"] {
+      background-color: color-mix(in srgb,
+            var(--subtext-color, var(--fg, #333)) 15%,
+            transparent) !important;
+      color: var(--example-sentence-color);
+   }
+
+   [data-sc-content|="example-sentence"] {
+      font-family: var(--font-serif);
+      opacity: var(--example-sentence-opacity);
+      display: block;
+      border-left-color: var(--dict-tag-color) !important;
+   }
+
+   [data-sc-content|="example-sentence"]:hover {
+      opacity: 1;
+      display: block;
+   }
+
+   [data-sc-content="example-sentence-a"] {
+      transition: opacity 0.3s ease;
+   }
+
+   [data-sc-content="example-sentence-b"] {
+      opacity: 0;
+      display: none;
+      transition: opacity 0.3s ease;
+      overflow: hidden;
+   }
+
+   [data-sc-content="example-sentence-a"]:hover+[data-sc-content="example-sentence-b"] {
+      opacity: 1;
+      display: block;
+   }
+
+   [data-sc-content="example-sentence-b"]:hover [data-sc-content|="example-sentence"] {
+      opacity: 1;
+   }
+
+   [data-sc-content="example-sentence"] rt {
+      opacity: 0;
+      transition: opacity ease 0.3s;
+   }
+
+   [data-sc-content="example-sentence"]:hover rt {
+      opacity: 1;
+   }
+
+   [data-sc-content="antonym"] {
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+   }
+
+   [data-sc-content="antonym"]:hover {
+      opacity: 1;
+   }
+
+   [data-sc-content="sense-note"],
+   [data-sc-content="xref"],
+   [data-sc-content="forms"],
+   div[data-sc-content="attribution"] {
+      display: none;
+   }
+}
+
+/* << Pixiv >> */
+[data-dictionary*="Pixiv"] {
+   [data-sc-pixiv="children"],
+   [data-sc-pixiv="related-tags"],
+   [data-sc-pixiv="continue-reading"],
+   [data-sc-pixiv="nav-header"] {
+      display: none;
+   }
+}
+
+/* 三省堂 & 新明解 */
+[data-dictionary*="三省堂"],
+[data-dictionary*="新明解"] {
+   .gloss-link {
+      pointer-events: none;
+      color: inherit;
+      text-decoration: none;
+   }
+
+   .gloss-image-link,
+   [data-sc-name="語義番号"] {
+      display: none;
+   }
+
+   [data-sc-class="外字"],
+   [data-sc-name="百科"],
+   [data-sc-name="homophone"],
+   [data-sc-name="アクセント"],
+   [data-sc-name="見出仮名"],
+   [data-sc-name*="rank"] {
+      display: none;
+   }
+
+   [data-sc-name=表記解説],
+   [data-sc-name^="派生"],
+   [data-sc-name="ルビ"] {
+      display: none;
+   }
+
+   [data-sc-name="用例G"] {
+      display: block;
+      font-size: 1em !important;
+      font-family: var(--font-serif);
+      color: var(--example-sentence-color);
+      opacity: var(--example-sentence-opacity);
+      transition: 0.2s ease;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      margin-bottom: 4px;
+      padding: 0.5em;
+      margin-left: 0.5em;
+      width: fit-content;
+      border-radius: 0.4rem;
+      border-left: solid calc(3em / var(--font-size-no-units, 3.2)) var(--dict-tag-color);
+      background-color: color-mix(in srgb,
+            var(--subtext-color, var(--fg, #333)) 15%,
+            transparent) !important;
+      text-wrap-mode: wrap;
+   }
+
+   [data-sc-name="用例"] {
+      display: inline;
+   }
+
+   [data-sc-name="用例"]:nth-of-type(n + 3) {
+      display: none;
+      padding: 0.5em;
+   }
+
+   [data-sc-name="用例G"]:hover {
+      opacity: 1;
+   }
+
+   [data-sc-name="品詞用法"],
+   [data-sc-name="見出部"] {
+      color: var(--highlight-text-color);
+      margin-bottom: 0.5em;
+   }
+
+   [data-sc-name*="注記"] {
+      color: var(--subtext-color);
+      font-family: var(--font-serif);
+   }
+
+   [data-sc-name*="反意語"] {
+      color: rgb(255, 100, 100);
+   }
+
+   [data-sc-name*="言換"] {
+      font-weight: bold;
+   }
+}

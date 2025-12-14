@@ -1,0 +1,24 @@
+/* outer.css */
+* {
+  padding: 0;
+}
+
+iframe.yomitan-popup {
+  background: transparent !important;
+  backdrop-filter: blur(3px) !important;
+  -webkit-backdrop-filter: blur(3px) !important;
+  border-radius: 12px !important;
+
+  /* hide scrollbar */
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE, Edge (legacy) */
+}
+
+/* Apply color-scheme based on data-theme attribute */
+iframe.yomitan-popup[data-theme="dark"] {
+  color-scheme: dark !important;
+}
+
+iframe.yomitan-popup[data-theme="light"] {
+  color-scheme: light !important;
+}

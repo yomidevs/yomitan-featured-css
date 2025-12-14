@@ -1,0 +1,1 @@
+This Yomitan CSS is kindly shared with permission by Bint (`caoimhe.00` on Discord).
